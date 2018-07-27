@@ -86,4 +86,52 @@ server.delete("/api/projects/:id", (req, res) => {
     });
 });
 
+//actionModel
+server.get("/api/actions", (req, res) => {
+  actionModel
+    .get()
+    .then(response => {
+      res.json(response);
+    })
+    .catch(error => {
+      return error;
+    });
+});
+
+server.get("/api/actions/:id", (req, res) => {
+  const { id } = req.params;
+  actionModel
+    .get(id)
+    .then(response => {
+      res.json(response);
+    })
+    .catch(error => {
+      return error;
+    });
+});
+
+server.post("/api/actions", (req, res) => {
+  const action = req.body;
+  actionModel
+    .insert(action)
+    .then(response => {
+      res.json(response);
+    })
+    .catch(error => {
+      return error;
+    });
+});
+
+server.delete("/api/actions/:id", (req, res) => {
+  const { id } = req.params;
+  actionModel
+    .remove(id)
+    .then(response => {
+      res.json({ response });
+    })
+    .catch(error => {
+      return error;
+    });
+});
+
 server.listen(8000, () => console.log("\n=== API running... ===\n"));
